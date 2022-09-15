@@ -1,0 +1,80 @@
+---
+title: "Simple document"
+output: html_document
+---
+
+```{r, message=F}
+library(tidyverse)
+```
+
+
+
+I'm an R Markdown document! 
+
+# Section 1
+
+Here's a **code chunk** that samples from 
+a _normal distribution_:
+
+```{r} 
+samp = rnorm(100)
+length(samp)
+##3 ticks: indicates r code chunk inside an Rmd file
+```
+
+
+
+
+# Section 2
+
+I can take the mean of the sample, too!
+The mean is `r mean(samp)`.
+
+
+# Section 3
+
+This is going to make a plot! First I generate a dataframe, then use `ggplot` to make a scatterplot.
+
+opt+cmd+I to make code chunk faster
+
+{r, echo = FALSE - no code just plot}
+{r, message = FALSE - no messages from execution}
+{r, eval = FALSE - no plot just code}
+
+name codechunks to keep track - can't be reused
+
+```{r chunk_scatterplot}
+plot_df <- 
+  tibble(
+    x = rnorm(n = 1000),
+    y = 1 + 2 * x + rnorm(n = 1000)
+  )
+
+ggplot(plot_df, aes(x = x, y = y)) +
+  geom_point()
+
+```
+
+# Section 4
+
+This is the learning assessment!
+
+```{r chunk_assessment}
+la_df <- tibble(
+  sample = rnorm(n = 500),
+  positive = sample > 0,
+  absolute = abs(sample)
+)
+
+ggplot(la_df, aes(x = absolute)) + geom_histogram()
+```
+
+The median is `r round(median(la_df$absolute), 2)`.
+
+
+
+
+
+
+
+
